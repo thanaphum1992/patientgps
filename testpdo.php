@@ -1,6 +1,6 @@
 <?php
-include("./conopd.php");
-$sql = 'SELECT * FROM countries';
+include("./connectionstate.php");
+$sql = 'SELECT * FROM patient';
 $result = $conn->prepare($sql);
 $result->execute();
 $sss = $result->fetchAll(PDO::FETCH_OBJ);
@@ -27,8 +27,8 @@ $sss = $result->fetchAll(PDO::FETCH_OBJ);
                 <?php foreach ($sss as $getdata) : ?>
                     <tr>
                         <td><?= $getdata->id; ?></td>
-                        <td><?= $getdata->name; ?></td>
-                        <td><?= $getdata->thainame; ?></td>
+                        <td><?= $getdata->pt_fname; ?></td>
+                        <td><?= $getdata->pt_lname; ?></td>
                         <td>
                             <a href="edit.php?id=<?= $hash = base64_encode($getdata->id) ?>" class="btn btn-info">Edit</a>
                             <a onclick="return confirm('Are you sure you want to delete this entry?')" href="delete.php?id=<?= $hash = base64_encode($getdata->id) ?>" class='btn btn-danger'>Delete</a>
