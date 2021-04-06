@@ -17,7 +17,7 @@
         function init() {
             var map = new longdo.Map({
                 placeholder: document.getElementById('map'),
-                zoom: 16,
+                zoom: 14,
                 lastView: false,
                 ui: longdo.UiComponent.Mobile
             });
@@ -29,13 +29,16 @@
             map.Ui.Fullscreen.visible(true);
             map.Ui.Crosshair.visible(true);
             map.Ui.Scale.visible(true);
-            map.location(longdo.LocationMode.Geolocation);
+            map.location();
+            $("#lat").map.location();
+            $("#lon").val(position.coords.longitude);
+
         }
     </script>
     <style type="text/css">
         #map {
             width: 100%;
-            height: 650px;
+            height: 550px;
             margin: auto;
         }
     </style>
@@ -66,7 +69,6 @@
                 <img src="dist/img/patient.png" alt="patient Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">PatientGPS</span>
             </a>
-
             <!--ส่วนเริ่มต้นของ Sidebar-->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -76,7 +78,6 @@
                         <a href="#" class="d-block">Welcome -- </a>
                     </div>
                 </div>
-
                 <!-- เริ่มต้น     Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -159,27 +160,44 @@
 
                                 <div class="card-body">
                                     <!-- Card body  -->
+
                                     <form>
                                         <div class="form-row">
                                             <div class="form-group col-md-2">
                                                 <label for="pname">คำนำหน้าชื่อ</label>
-                                                <select id="pname" class="form-control">
+                                                <select id="pname" name="pname" class="form-control">
                                                     <option selected>โปรดเลือก</option>
                                                     <option>...</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-5">
-                                                <label for="fname">Email address</label>
-                                                <input type="text" class="form-control" id="fname" placeholder="Enter email">
-                                            </div>
-                                            <div class="form-group col-md-5">
-                                                <label for="lname">นามสกุล</label>
-                                                <input type="ะำปะ" class="form-control" id="lname" placeholder="นามสกุล">
+                                            <div class="form-group col-md-4">
+                                                <label for="fname">ชื่อ</label>
+                                                <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อ">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="file">รูปภาพ</label>
+                                                <label for="lname">นามสกุล</label>
+                                                <input type="text" class="form-control" id="lname" name="lname" placeholder="นามสกุล">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="sex">เพศ</label>
+                                                <select id="sex" name="sex" class="form-control">
+                                                    <option selected>โปรดเลือก</option>
+                                                    <option>...</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="cid">เลขประจำตัวประชาชน</label>
+                                                <input type="text" class="form-control" id="cid" name="cid" placeholder="เลขประจำตัวประชาชน 13 หลัก">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="bod">วันเกิด</label>
+                                                <input type="date" class="form-control" name="bod" id="bod">
+                                            </div>
+
+                                            <div class="form-group col-md-4">
+                                                <label for="img">รูปภาพ</label>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="file">
+                                                    <input type="file" class="custom-file-input" name="img" id="img">
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
                                             </div>
@@ -200,15 +218,24 @@
                                         แผนที่
                                     </h3>
                                 </div>
-
                                 <div class="card-body">
                                     <!-- Card body  -->
                                     <form>
-                                        <div id="map"></div>
+                                        <div class="form-row">
+                                            <?echo($result);?>
+                                            <div class="form-group col-md-6">
+                                                <label for="lat">Latitude :</label>
+                                                <input type="text" class="form-control" id="lat" name="lat" placeholder="ละติจูด">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="long">Longitude :</label>
+                                                <input type="text" class="form-control" id="lon" name="lon" placeholder="ลองจิจูด">
+                                            </div>
+                                            <div id="map"></div>
+                                        </div>
                                     </form>
                                     <!-- /.card-body -->
                                 </div>
-
                             </div>
                         </div>
                     </div>
